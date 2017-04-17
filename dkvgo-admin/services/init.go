@@ -44,6 +44,8 @@ func ormSetup() {
 		dbUser, dbPassword, dbHost, dbPort, dbName, dbCharset)
 	if dbTimezone != "" {
 		dsn = dsn + "&loc=" + url.QueryEscape(dbTimezone)
+	} else {
+		dsn = dsn + "&loc=Local"
 	}
 	orm.RegisterDriver("mysql", orm.DRMySQL)
 	orm.RegisterDataBase("default", dbType, dsn)
