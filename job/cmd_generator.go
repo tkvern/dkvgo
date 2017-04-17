@@ -8,7 +8,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/krufyliu/dkvgo/util"
+	"dkvgo/util"
 )
 
 // BinMap define composition algorithm to executable

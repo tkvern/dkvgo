@@ -6,8 +6,8 @@ import (
 
 	"time"
 
-	"github.com/krufyliu/dkvgo/job"
-	"github.com/krufyliu/dkvgo/job/store"
+	"dkvgo/job"
+	"dkvgo/job/store"
 )
 
 // JobTracker trace job's lifecycle

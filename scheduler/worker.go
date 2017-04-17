@@ -11,9 +11,9 @@ import (
 
 	"io"
 
-	"github.com/krufyliu/dkvgo/job"
-	"github.com/krufyliu/dkvgo/protocol"
-	"github.com/krufyliu/dkvgo/scheduler/tracker"
+	"dkvgo/job"
+	"dkvgo/protocol"
+	"dkvgo/scheduler/tracker"
 )
 
 type Worker struct {

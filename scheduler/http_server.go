@@ -8,7 +8,7 @@ import (
 	"time"
 
 	"github.com/gorilla/mux"
-	"github.com/krufyliu/dkvgo/scheduler/tracker"
+	"dkvgo/scheduler/tracker"
 )
 
 func stopJob(w http.ResponseWriter, r *http.Request) {

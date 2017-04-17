@@ -3,7 +3,7 @@ package main
 import (
 	"os"
 
-	"github.com/krufyliu/dkvgo/worker"
+	"dkvgo/worker"
 )
 
 func main() {

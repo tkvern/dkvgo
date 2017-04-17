@@ -11,7 +11,7 @@ import (
 
 	"io"
 
-	"github.com/krufyliu/dkvgo/job"
+	"dkvgo/job"
 )
 
 // Context define the ctx of DkvWorker

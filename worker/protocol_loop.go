@@ -11,7 +11,7 @@ import (
 
 	"time"
 
-	"github.com/krufyliu/dkvgo/protocol"
+	"dkvgo/protocol"
 )
 
 // ProtocolLoop define

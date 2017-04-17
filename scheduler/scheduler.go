@@ -5,9 +5,9 @@ import (
 	"net"
 	"sync"
 
-	"github.com/krufyliu/dkvgo/job"
-	"github.com/krufyliu/dkvgo/job/store"
-	"github.com/krufyliu/dkvgo/scheduler/tracker"
+	"dkvgo/job"
+	"dkvgo/job/store"
+	"dkvgo/scheduler/tracker"
 )
 
 // DkvScheduler d

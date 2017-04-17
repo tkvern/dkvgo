@@ -1,7 +1,7 @@
 package store
 
 import (
-	"github.com/krufyliu/dkvgo/job"
+	"dkvgo/job"
 )
 
 // TaskStore define task store and get interface

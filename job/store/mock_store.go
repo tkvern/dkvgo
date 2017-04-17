@@ -6,7 +6,7 @@ import (
 	"io/ioutil"
 	"log"
 
-	"github.com/krufyliu/dkvgo/job"
+	"dkvgo/job"
 )
 
 type MockStore struct {

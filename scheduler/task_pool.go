@@ -6,7 +6,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/krufyliu/dkvgo/job"
+	"dkvgo/job"
 )
 
 type TaskPool struct {

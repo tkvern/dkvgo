@@ -8,7 +8,7 @@ import (
 
 	"encoding/json"
 
-	"github.com/krufyliu/dkvgo/job"
+	"dkvgo/job"
 )
 
 // TimeLayout define database datetime format

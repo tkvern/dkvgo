@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/krufyliu/dkvgo/scheduler"
+	"dkvgo/scheduler"
 )
 
 func main() {

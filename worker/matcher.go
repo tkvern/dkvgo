@@ -10,7 +10,7 @@ import (
 
 	"os"
 
-	"github.com/krufyliu/dkvgo/job"
+	"dkvgo/job"
 )
 
 var (

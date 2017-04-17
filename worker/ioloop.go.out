@@ -7,8 +7,8 @@ import (
 	"log"
 	"net"
 
-	"github.com/krufyliu/dkvgo/protocol"
-	"github.com/krufyliu/dkvgo/job"
+	"dkvgo/protocol"
+	"dkvgo/job"
 )
 
 var (

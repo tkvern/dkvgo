@@ -1,7 +1,7 @@
 package protocol
 
 import (
-	"github.com/krufyliu/dkvgo/job"
+	"dkvgo/job"
 )
 
 type HeartBeatBag struct {
