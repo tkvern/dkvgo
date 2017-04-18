@@ -90,6 +90,7 @@ func (cg *CmdGenerator) getCmdOpts() map[string]string {
 		"mix_rectify_file":    path.Join(videoDir, "mix_rectify.xml"),
 		//"camera_setting_file": cg.getCameraSettingFileName(),
 		"camera_setting_file_dir": cg.getCameraSettingDir(),
+		"default_camera_file":     path.Join(videoDir, "camera_setting.xml"),
 		"enable_top":              cg.job.EnableTop,
 		"enable_bottom":           cg.job.EnableBottom,
 		"save_debug_img":          cg.job.SaveDebugImg,
@@ -104,7 +105,7 @@ func (cg *CmdGenerator) getCmdOpts() map[string]string {
 // GetCmd get a exec.Cmd
 func (cg *CmdGenerator) GetCmd() *exec.Cmd {
 	fields := []string{
-		"video_dir", "output_dir", "time_alignment_file",
+		"video_dir", "output_dir", "time_alignment_file", "default_camera_file",
 		"camera_setting_file_dir", "ring_rectify_file",
 		"top_rectify_file", "bottom_rectify_file", "mix_rectify_file",
 		"start_frame", "end_frame", "enable_top", "enable_bottom",
