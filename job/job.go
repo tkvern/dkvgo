@@ -157,12 +157,14 @@ func (t *Job) String() string {
 
 // TaskOptions describle video composition parameters
 type TaskOptions struct {
-	StartFrame int `json:"start_frame"`
-	EndFrame   int `json:"end_frame"`
-	FrameAt    int `json:"frame_at"`
+	StartFrame    int    `json:"start_frame"`
+	EndFrame      int    `json:"end_frame"`
+	FrameAt       int    `json:"frame_at"`
+	RunningHost   string `json:"running_host"`
+	RunningStatus string `json:"running_status"`
 }
 
-// Task describle sub task
+// Task describle sub job
 type Task struct {
 	Job     *Job
 	Options *TaskOptions
@@ -180,6 +182,7 @@ func (task Task) String() string {
 func (task *Task) UpdateState(state *TaskState) {
 	task.state = state
 	task.Options.FrameAt = state.FrameAt
+	task.Options.RunningStatus = state.Status
 }
 
 func (task *Task) GetState() *TaskState {

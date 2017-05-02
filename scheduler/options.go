@@ -10,6 +10,7 @@ type _options struct {
 	HTTPAddr string
 	DBType   string
 	DBAddr   string
+	SplitNum int
 }
 
 var Options *_options

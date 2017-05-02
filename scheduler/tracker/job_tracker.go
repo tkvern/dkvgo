@@ -8,6 +8,7 @@ import (
 
 	"dkvgo/job"
 	"dkvgo/job/store"
+	"strings"
 )
 
 // JobTracker trace job's lifecycle
@@ -39,6 +40,7 @@ func (tr *jobTracker) trace() {
 			tr.id2Job[_job.ID] = _job
 		}
 		tr.Unlock()
+		task.Options.RunningHost = strings.Split(tc.runAddr, ":")[0]
 		tr.jobMapping[_job.ID][task] = tc.runAddr
 		if tc.state != nil {
 			tr.handleState(task, tc.state)

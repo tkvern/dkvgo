@@ -13,8 +13,7 @@ import (
 // DkvScheduler d
 type DkvScheduler struct {
 	sync.WaitGroup
-	mu          sync.Mutex
-	opts        *_options
+	Opts        *_options
 	tcpListener net.Listener
 	TaskPool    *TaskPool
 	Store       store.JobStore
@@ -23,7 +22,7 @@ type DkvScheduler struct {
 
 func newDkvScheduler() *DkvScheduler {
 	var sched = &DkvScheduler{
-		opts: Options,
+		Opts: Options,
 		//Store: store.NewMockStore(),
 		Store: store.NewDatabaseStore(Options.DBType, Options.DBAddr),
 	}
@@ -31,23 +30,11 @@ func newDkvScheduler() *DkvScheduler {
 	return sched
 }
 
-func (s *DkvScheduler) AddRunningJob(_job *job.Job) {
-	s.mu.Lock()
-	defer s.mu.Unlock()
-	s.runningJobs[_job.ID] = _job
-}
-
-func (s *DkvScheduler) RemoveRunningJob(_job *job.Job) {
-	s.mu.Lock()
-	defer s.mu.Unlock()
-	delete(s.runningJobs, _job.ID)
-}
-
 func (s *DkvScheduler) Main() {
 	tracker.InitWithStore(s.Store)
-	tcpListener, err := net.Listen("tcp", s.opts.TCPAddr)
+	tcpListener, err := net.Listen("tcp", s.Opts.TCPAddr)
 	if err != nil {
-		log.Fatalf("FATAL: listen %s failed - %s\n", s.opts.TCPAddr, err)
+		log.Fatalf("FATAL: listen %s failed - %s\n", s.Opts.TCPAddr, err)
 	}
 	s.tcpListener = tcpListener
 	log.Printf("TCP listen on %s\n", tcpListener.Addr())
@@ -65,6 +52,6 @@ func (s *DkvScheduler) runTcpServer() {
 
 func (s *DkvScheduler) runApiServer() {
 	defer s.Done()
-	log.Printf("HTTP listen on %s", s.opts.HTTPAddr)
-	APIServer(s.opts.HTTPAddr).ListenAndServe()
+	log.Printf("HTTP listen on %s", s.Opts.HTTPAddr)
+	APIServer(s.Opts.HTTPAddr).ListenAndServe()
 }
