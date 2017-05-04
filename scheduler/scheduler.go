@@ -5,7 +5,6 @@ import (
 	"net"
 	"sync"
 
-	"dkvgo/job"
 	"dkvgo/job/store"
 	"dkvgo/scheduler/tracker"
 )
@@ -17,7 +16,6 @@ type DkvScheduler struct {
 	tcpListener net.Listener
 	TaskPool    *TaskPool
 	Store       store.JobStore
-	runningJobs map[int]*job.Job
 }
 
 func newDkvScheduler() *DkvScheduler {
@@ -30,6 +28,7 @@ func newDkvScheduler() *DkvScheduler {
 	return sched
 }
 
+// Main entry
 func (s *DkvScheduler) Main() {
 	tracker.InitWithStore(s.Store)
 	tcpListener, err := net.Listen("tcp", s.Opts.TCPAddr)
@@ -38,19 +37,27 @@ func (s *DkvScheduler) Main() {
 	}
 	s.tcpListener = tcpListener
 	log.Printf("TCP listen on %s\n", tcpListener.Addr())
-	s.Add(1)
-	s.Add(1)
-	go s.runTcpServer()
-	go s.runApiServer()
+	s.Add(2)
+	go s.runTCPServer()
+	go s.runAPIServer()
 	s.Wait()
 }
 
-func (s *DkvScheduler) runTcpServer() {
+// GetSplitNum return a number than how to split the job
+func (s *DkvScheduler) GetSplitNum() int {
+	splitNum := s.Opts.SplitNum
+	if splitNum <= 0 {
+		splitNum = 2
+	}
+	return splitNum
+}
+
+func (s *DkvScheduler) runTCPServer() {
 	defer s.Done()
 	TCPServer(s.tcpListener, &ProtocolLoop{ctx: s})
 }
 
-func (s *DkvScheduler) runApiServer() {
+func (s *DkvScheduler) runAPIServer() {
 	defer s.Done()
 	log.Printf("HTTP listen on %s", s.Opts.HTTPAddr)
 	APIServer(s.Opts.HTTPAddr).ListenAndServe()

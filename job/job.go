@@ -7,9 +7,6 @@ import (
 	"time"
 )
 
-// TaskSplitNum define split level
-const TaskSplitNum = 6
-
 // Job define the basic information for running
 type Job struct {
 	sync.Mutex
@@ -36,16 +33,16 @@ type Job struct {
 	numOfTaskRunning  int
 }
 
-// map split t to N small piece
-func (t *Job) split() {
+// map split t to n small piece
+func (t *Job) split(n int) {
 	if len(t.TaskOpts) != 0 {
 		return
 	}
 	var startFrame = t.StartFrame
 	var endFrame = t.EndFrame
 	var totalFrames = endFrame - startFrame + 1
-	var avgFrames = totalFrames / TaskSplitNum
-	var splitNum = TaskSplitNum
+	var avgFrames = totalFrames / n
+	var splitNum = n
 	if avgFrames < 2 {
 		splitNum = totalFrames / 2
 		avgFrames = 2
@@ -63,8 +60,8 @@ func (t *Job) split() {
 	}
 }
 
-func (t *Job) Init() {
-	t.split()
+func (t *Job) Init(n int) {
+	t.split(n)
 	for _, opt := range t.TaskOpts {
 		if opt.FrameAt == opt.EndFrame+1 {
 			t.numOfCompleteTask++

@@ -83,7 +83,7 @@ func (tp *TaskPool) tryFill() bool {
 	}
 	log.Printf("fill task pool with %d\n", _job.ID)
 	tp.ctx.Store.LoadJobState(_job)
-	_job.Init()
+	_job.Init(tp.ctx.GetSplitNum())
 	// set state to accept
 	_job.Status = 0x01
 	tp.ctx.Store.UpdateJob(_job)
